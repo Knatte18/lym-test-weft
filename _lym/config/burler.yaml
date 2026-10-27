@@ -1,5 +1,5 @@
 # burler.yaml — the lens/fan library for burler cluster review. Materialized
-# once (lyx init / lyx config reconcile) when this file is absent; after that,
+# once (lym init / lym config reconcile) when this file is absent; after that,
 # this file is OPERATOR-OWNED: reconcile is seed-only for burler.yaml and
 # never rewrites or prunes it again, so any lens or fan you add, edit, or
 # remove here survives every future reconcile untouched. Deleting a standard
