@@ -1,2 +1,1 @@
-slots: 2 # how many gate builds and test runs the hub executes at once; a lowered count takes effect on the next acquire while a running holder finishes
-busy_quit_sec: 120 # seconds a Go test binary under lym gate test may keep a CPU core at least 90 percent busy before it gets one SIGQUIT and dumps its goroutine stacks; 0 turns the watchdog off; raise it for a package that is CPU-bound but healthy
+# This file holds the hub's tuned values over lym's template.
