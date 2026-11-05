@@ -14,13 +14,15 @@ Owner none recorded
 
 Concrete and claimable; only a task can run.
 
-#### Ready (0)
+#### Ready (1)
 
 Waits on nothing open; can start now.
 
-_None._
+| # | Task | Slug | Recipe | After | Age<br>Revised | Labels |
+| --- | --- | --- | --- | --- | --- | --- |
+| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light |  | 0m<br>0m |  |
 
-#### Draft (5)
+#### Draft (4)
 
 Not released; nothing starts it until its status is cleared.
 
@@ -30,7 +32,6 @@ Not released; nothing starts it until its status is cleared.
 | T2 | `draft` **Rename FormatGreeting to ComposeGreeting in services/api**<br>• Pure rename of an existing exported helper to a clearer name | [`glyph-rename-format`](design-glyph-rename-format.md) | darn |  |  |  |
 | T3 | `draft` **Add a farewell path alongside ComposeGreeting in services/api**<br>• Extract a defaultName helper, add ComposeFarewell, and cover it with a table-driven test. | [`r4-crash-hub`](design-r4-crash-hub.md) | darn |  |  |  |
 | T4 | `draft` **Add a ComposeGreeting helper with default-name handling in services/api**<br>• Extend the FormatGreeting helper in services/api with default-name handling and a unit test. | [`dummy-r2-greet`](design-dummy-r2-greet.md) | darn |  |  |  |
-| T5 | `draft` **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light |  | 0m<br>0m |  |
 
 ### Notes (0)
 
