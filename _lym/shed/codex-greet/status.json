@@ -1,13 +1,13 @@
 {
-  "current_producer": "",
-  "state": "failed",
-  "error": "loomrecipe: shedbuild: producer 4 \"Darn-Write\": shedrecipe: Darn-Write: gate fixer: loomcli: render the Darn-Write fixer's gate call: gate config: the hub declares no tier0, so no gate has a tier to run; fix it with \"lym config gate\" from the prime; a session that is not the prime takes none of these steps; it reports status: FAILED and the orch runs them",
+  "current_producer": "Preflight",
+  "state": "running",
+  "error": "",
   "pending_by": "shed",
   "pause_requested": false,
   "activity": {
-    "now": "",
+    "now": "Preflight",
     "last": "",
-    "wait": "loomrecipe: shedbuild: producer 4 \"Darn-Write\": shedrecipe: Darn-Write: gate fixer: loomcli: render the Darn-Write fixer's gate call: gate config: the hub declares no tier0, so no gate has a tier to run; fix it with \"lym config gate\" from the prime; a session that is not the prime takes none of these steps; it reports status: FAILED and the orch runs them"
+    "wait": ""
   },
   "history": [],
   "product": {
