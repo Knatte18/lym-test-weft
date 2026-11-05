@@ -20,7 +20,7 @@ Held by a run; its scope is locked until the run ends.
 
 | # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light | Drift-Verify | neve | 2h<br>2h |  |
+| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light | Code-Bouncer | neve | 2h<br>2h |  |
 
 #### Ready (0)
 
