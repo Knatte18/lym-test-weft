@@ -1,6 +1,6 @@
 # services/api prints a greeting through a Greeting helper
 
-`codex-greet` · Task · enhancement · running · Worktree-Create
+`codex-greet` · Task · enhancement · running · Open-IDE
 
 ## Wanted
 
