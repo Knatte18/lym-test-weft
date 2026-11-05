@@ -14,13 +14,19 @@ Owner `neve`
 
 Concrete and claimable; only a task can run.
 
-#### Ready (1)
+#### Running (1)
+
+Held by a run; its scope is locked until the run ends.
+
+| # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light | Worktree-Create | neve | 0m<br>0m |  |
+
+#### Ready (0)
 
 Waits on nothing open; can start now.
 
-| # | Task | Slug | Recipe | After | Age<br>Revised | Labels |
-| --- | --- | --- | --- | --- | --- | --- |
-| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light |  | 0m<br>0m |  |
+_None._
 
 #### Draft (4)
 

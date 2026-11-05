@@ -80,6 +80,7 @@
       "isolated": false,
       "brief": "Add go.mod for services/api and a Greeting helper that main prints",
       "body": "## Wanted\n\n- `services/api` gets its own `go.mod` (module `github.com/Knatte18/lym-test/services/api`, go 1.22) so it builds alone.\n- A function `Greeting(name string) string` in `services/api/greeting.go` returns `Hello, \u003cname\u003e!`, and `Hello, world!` for an empty or all-whitespace name.\n- `main` prints `Greeting(\"\")` to stdout.\n- `services/api/greeting_test.go` covers the named, empty and whitespace cases in one table test.\n",
+      "status": "running · Worktree-Create",
       "created": "2026-11-05T09:10:09Z",
       "revised": "2026-11-05T09:10:09Z",
       "profile": "light"
