@@ -1,1 +1,7 @@
-# This file holds the hub's tuned values over lym's template.
+tiers:
+    tier0:
+        command: "go test -json {targets} {args}"
+        all_targets: ./...
+        timeout_min: 10
+        counter: go-json
+        dir: services/api
