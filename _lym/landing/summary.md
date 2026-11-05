@@ -1,4 +1,5 @@
-# Add a standalone API greeting
+# Add a standalone API greeting executable
 
-The `services/api` package now has its own Go 1.22 module and a `Greeting` function that returns the supplied name in a greeting, defaulting blank or whitespace-only input to `world`.
-The executable prints the default greeting, and a table-driven test covers named, empty, and whitespace-only input.
+Give `services/api` its own Go module so it can build independently.
+Add `Greeting`, which returns `Hello, <name>!` and defaults empty or whitespace-only names to `world`.
+The executable prints the default greeting, and a table-driven test covers named, empty and whitespace names.
