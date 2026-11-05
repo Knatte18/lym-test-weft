@@ -1,12 +1,12 @@
 {
   "current_producer": "Darn-Write",
-  "state": "running",
-  "error": "",
+  "state": "blocked",
+  "error": "gate did not pass after 3 attempts; findings: /home/knatte/Code/lym-test-LYMHUB/codex-greet/.lym/shed/codex-greet/gate-findings/Darn-Write.md; way forward: run \"lym loom resume\" in the task worktree, which re-spawns Darn-Write with a fresh verify budget",
   "pause_requested": false,
   "activity": {
     "now": "Darn-Write",
-    "last": "Drift-Await → skipped",
-    "wait": ""
+    "last": "Darn-Write → stuck",
+    "wait": "gate did not pass after 3 attempts; findings: /home/knatte/Code/lym-test-LYMHUB/codex-greet/.lym/shed/codex-greet/gate-findings/Darn-Write.md; way forward: run \"lym loom resume\" in the task worktree, which re-spawns Darn-Write with a fresh verify budget"
   },
   "history": [
     {
@@ -35,6 +35,58 @@
       "output": "",
       "at": "2026-11-05T09:11:15Z",
       "reason": "drift.enabled = false"
+    },
+    {
+      "producer": "Darn-Write",
+      "outcome": "stuck",
+      "output": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/landing/summary.md",
+      "at": "2026-11-05T09:16:30Z",
+      "gate_attempts": 3,
+      "gate_spans": [
+        {
+          "gate": "clean",
+          "kind": "gate",
+          "start": "2026-11-05T09:15:15.879344174Z",
+          "end": "2026-11-05T09:15:15.881110652Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "rework",
+          "start": "2026-11-05T09:15:17.299735642Z",
+          "end": "2026-11-05T09:15:46.391564043Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "gate",
+          "start": "2026-11-05T09:15:46.413557326Z",
+          "end": "2026-11-05T09:15:46.415453376Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "rework",
+          "start": "2026-11-05T09:15:47.808389274Z",
+          "end": "2026-11-05T09:16:10.876435481Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "gate",
+          "start": "2026-11-05T09:16:10.899187134Z",
+          "end": "2026-11-05T09:16:10.901096039Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "rework",
+          "start": "2026-11-05T09:16:12.297399532Z",
+          "end": "2026-11-05T09:16:30.373530454Z"
+        },
+        {
+          "gate": "clean",
+          "kind": "gate",
+          "start": "2026-11-05T09:16:30.396061744Z",
+          "end": "2026-11-05T09:16:30.397724147Z"
+        }
+      ],
+      "budget_exempt": true
     }
   ],
   "product": {
