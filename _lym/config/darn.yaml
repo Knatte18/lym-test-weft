@@ -1,3 +1,1 @@
-arbiter: opus[high] # overrides shed.yaml's arbiter model-spec for a darn run (see contracts/specs/llm-model-spec.md); empty inherits shed.yaml
-arbiter_timeout_min: 30 # overrides shed.yaml's arbiter_timeout_min for a darn run; 0 inherits shed.yaml
-arbiter_max_spawns: 3 # overrides shed.yaml's arbiter_max_spawns for a darn run; null inherits shed.yaml, and a set 0 turns the arbiter off for darn
+# This file holds the hub's tuned values over lym's template.
