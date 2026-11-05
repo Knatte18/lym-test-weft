@@ -1,0 +1,20 @@
+{
+  "number": 1,
+  "stop_key": {
+    "current_producer": "",
+    "history_length": 0,
+    "state": "failed"
+  },
+  "pause_before": "",
+  "pause_after": "",
+  "snapshot": {
+    "head": "e21d5d55de65305ff0b2e736827a42afdd58168b",
+    "branch": "codex-greet",
+    "dirty": {}
+  },
+  "spawned_at": "2026-11-05T10:10:20.650061891+01:00",
+  "deadline": "2026-11-05T10:20:20.650061891+01:00",
+  "envelope_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-envelope-20261105-101020-5b83.json",
+  "report_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-report-20261105-101020-42e2.md",
+  "strand_guid": "94cc3ed9c0702b27a76aaa9a2972b6b9"
+}

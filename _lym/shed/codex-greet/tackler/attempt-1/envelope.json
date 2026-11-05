@@ -1,0 +1,11 @@
+{
+  "verdict": "hand-back",
+  "reason": "The bootstrap stop (trace db1758f3f1274730, envelope steps/db1758f3f1274730.json) names its own cause: the hub declares no tier0, so the Darn-Write producer's gate fixer cannot render its gate call. Nothing in the repository declares tier0; a grep of the worktree and .lym finds the phrase only in the logs of this stop. A plain re-launch cannot settle it: the stop's own text says the fix is `lym config gate` run from the prime, and a session that is not the prime takes none of those steps. This tackler may not run a lym verb that changes the run, so the fix sits with the run's parent or prime, not with a resume.",
+  "question": "The hub declares no tier0, so no gate has a tier to run and the Darn-Write producer (producer 4) cannot start its gate fixer (run codex-greet, trace db1758f3f1274730). Will the prime declare tier0 with `lym config gate`? Once it does, say so and the run can be resumed with a plain re-launch.",
+  "goto": "",
+  "cause": "",
+  "attempt": 1,
+  "attempt_dir": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-1",
+  "verdict_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-1/verdict.yaml",
+  "case_brief_path": ""
+}
