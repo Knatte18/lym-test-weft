@@ -1,6 +1,6 @@
 # services/api prints a greeting through a Greeting helper
 
-`codex-greet` · Task · enhancement · running · Code-Burler-Fix
+`codex-greet` · Task · enhancement · running · Code-Bouncer
 
 ## Wanted
 
