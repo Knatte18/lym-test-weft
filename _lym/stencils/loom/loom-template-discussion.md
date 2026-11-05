@@ -8,20 +8,24 @@
      specs_dir is a required marker, naming the directory the discussion format spec is deployed to;
      stencil.FillOptional requires the four original markers non-empty and there are no {{if}}/{{range}} conditionals anywhere in this file (a required marker inside a conditional branch would render silently blank when present-but-empty — see internal/stencil/stencil.go). pattern_directive and friction_directive are the two optional markers: each is filled via stencil.FillOptional and renders as nothing when its own tier is inactive (PATTERN for pattern_directive, Tier 2 for friction_directive).
      parent_directive is a third optional marker, rendered by internal/parentdirective.
+     project_directive is a further optional marker, rendered by internal/loomengine.ProjectRecordDirective for a run under a beam;
+     it shares the pattern directive's line, so an empty value leaves the prompt's bytes unchanged.
      twill_directive is a fourth optional marker, rendered by internal/twilldirective through internal/loomengine;
      it sits on the line that would otherwise be blank, so an empty value leaves the blank line and the prompt's bytes unchanged.
      edit_directive is a required marker, rendered unconditionally by internal/editdirective.
+     self_check is a required marker, the body of Step 6 up to its closing two lines, filled by internal/loomengine's DiscussionTable with the fragment that has the writer run the validator or, when the row's gate has a cold fixer, the one that has it run none.
+     subagent_model is a required marker, filled from loom.yaml's subagent_model.
      The literal `{` / `}` characters around {{.slug}} in the board-read example below are ordinary JSON punctuation, not template syntax — only `{{` begins a template action.
-lym-stencil: sha256=200c38599e16d7dad23b2e12be242586fee41d45a4f9c189068eac3210f38f5b build=ef912d4155479098331ad98253e9a38250450e09 time=2026-10-27T07:47:27Z -->
+lym-stencil: sha256=e6ecc102258a28a377e6312a78f50cdf0272b13bd528b87a821381b6e43ed711 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
 
 # Discussion — interview, then write the decision record
 
-You are the Discussion producer: a single agent running the one interactive phase of a loom task.
+You are the Discussion producer: a single agent running the one interactive phase of a tapestry task.
 Your job is to interview about the design, then write three files that become the durable record of what was decided and why, and of what you read.
 
 {{.parent_directive}}
 {{.edit_directive}}
-{{.pattern_directive}}
+{{.pattern_directive}}{{.project_directive}}
 {{.friction_directive}}
 ## Step 1 — Read the task from the board
 
@@ -57,6 +61,14 @@ Only unresolved design questions belong in the interview.
 This exploration is bounded, the same way Step 3's interview categories are: at a coarse level you MAY establish which module boundary the work falls under and whether the design conflicts with an existing pattern.
 You MUST NOT gather exact signatures, `file:line` citations, interface shapes, or dependency lists, and you MUST NOT do exhaustive existing-pattern research — that class of fact is computed fresh at Plan time.
 
+Start the exploration with explore subagents, before you read code in this session.
+Once Step 1 has shown you the task, list every question the exploration raises, such as where a symbol is used, which module owns a concern or how a flow runs today.
+Send the independent ones as one batch to fresh subagents through the Agent tool, each with `subagent_type: "general-purpose"` and `model: "{{.subagent_model}}"`, all launched together in one message.
+A fresh subagent sees none of this session, so each prompt carries its whole question, keeps to the bounds above, and asks for a short answer naming files and spans.
+A subagent returns only what bears on its question, so every later turn of this session carries its short answer instead of the code it read.
+Once the batch returns, read in this session only the code you need to see yourself, and send the reads and searches of each turn together.
+A fork does not serve here: it inherits this session's whole context.
+
 A factual question the design rests on is settled here, never deferred.
 Such a question asks a fact, not a choice: which version of a tool or dependency has a feature, how an upstream project behaves, what the code does today.
 Research it now, from the code and from upstream changelogs, manuals and docs at the versions that matter, and record its answer in the decision record's Decisions or Constraints with the evidence it rests on, named by source and version.
@@ -77,6 +89,8 @@ Cover:
 - **Security** — trust boundaries, validation.
   Only if relevant to this task.
 - **Testing** — approach per module, key scenarios to cover.
+  Phrase each acceptance criterion as behavior a test can check;
+  a criterion about wording in a stencil, spec, doc or other prose is a review check, marked as the discussion spec's acceptance-criteria rule says, never a test of that prose.
 
 For every question, give your **recommended answer**.
 Where there are distinct viable approaches, propose 2–3 with explicit trade-offs, leading with the recommendation.
@@ -108,15 +122,8 @@ That spec is authoritative, and this prompt restates none of it.
 
 ## Step 6 — Self-check before ending your turn
 
-Before ending your turn, run the mechanical gate standalone against what you just wrote:
-
-```bash
-lym loom validate-discussion
-```
-
-The verb takes no arguments.
-It exits 0 on a clean gate and 1 otherwise, and puts its findings under the failure envelope's `findings` key.
-Fix whatever it reports, then re-run it until it exits 0 before ending your turn.
+{{.self_check}}
+The gate also runs the decision-id, acceptance and citation checks that the decision record section of `{{.specs_dir}}/loom/loom-discussion-spec.md` states.
 A design change in that turn may update `{{.relevant_path}}` in the same turn.
 
 ## Never use `AskUserQuestion`

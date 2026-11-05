@@ -1,4 +1,4 @@
-<!-- This is the Code-Review rubric. It is read by the Bouncer row and the review row of the Code-Review perch, in the loom and darn recipes alike:
+<!-- This is the Code-Review rubric. It is read by the Bouncer row and the review row of the Code-Review perch, in the tapestry, darn and sampler recipes alike:
      the Code-Bouncer row interpolates it as bouncer-template-seed.md's and
      bouncer-template-judge.md's rubric marker value, and the Code-Burler-Review row interpolates it
      the same way into internal/burlerengine's own review prompt.
@@ -6,7 +6,7 @@
      It is a marker VALUE, never a template -- it carries no top-level stencil markers of its own, and
      internal/stencil's StripLeadingComment removes this leading comment before either consumer ever
      sees it.
-lym-stencil: sha256=fa5f1d4d5020b16ae795b6c3189970160cfa8a47a60f43113b773e766e40168d build=ef912d4155479098331ad98253e9a38250450e09 time=2026-10-27T07:47:27Z -->
+lym-stencil: sha256=a76a7533dc943f26f63f43a8868f7e9a41fc24278cc63ea28aadaf5fcc852239 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
 
 # Code-Review rubric
 
@@ -20,9 +20,9 @@ The answer key takes one of two forms, and the sections below that apply to only
 - **A plan.**
   The decision record, `_lym/discussion/decision-record.md`, settles what the task's change must do, and the plan, `_lym/plan/00-overview.md` with the card files its Card Index names, is how the cards carry it out.
   The Card model the plan implements, and its format contract, are in `{{.specs_dir}}/loom/loom-plan-spec.md`; this rubric points at it and restates neither.
-- **A board entry snapshot.**
-  `_lym/discussion/board-entry.md` is the task's board entry, written by lym, and the decision record's `Added after Discussion` entries amend it, an entry by the parent, the operator or the arbiter winning over the snapshot where they differ.
-  The record's other sections are the writer's own claim, made before coding and reviewed by no one: check them against the snapshot, never use them as the measuring stick.
+- **A decision record alone.**
+  The decision record, `_lym/discussion/decision-record.md`, holds the task's board entry under `## Goal`, and its `Added after Discussion` entries amend it, an entry by the parent, the operator or the arbiter winning over the entry where they differ.
+  The record's other sections are the writer's own claim, made before coding and reviewed by no one: check them against the amended entry, never use them as the measuring stick.
 
 The change description at `_lym/landing/summary.md`, when present, is the writer's own account of the diff: read it as a claim to check against the diff, never as the measuring stick.
 
@@ -36,6 +36,10 @@ nothing else states it.
 
 Review `git diff {{.review_base}}..HEAD` — every commit the current branch introduces over the merge base the run's last merged parent tip leaves.
 Nothing else widens the range.
+
+When the amended board entry is a merge in from the parent, filed by `lym beam merge-parent`, the range narrows to the merge itself.
+Review each merge commit in the range through `git show --remerge-diff <commit>`, which shows how its conflicts were settled, and every commit in the range that is not a merge.
+The parent's own commits the merge brings in are no subject.
 
 The step is read-only.
 If the range above reads `git diff none..HEAD`, its base could not be read: raise a BLOCKING finding stating that the review range could not be determined, and review nothing.
@@ -68,7 +72,7 @@ Do not flag any of the following as a finding:
 - **Comment-convention compliance.**
   Any new or changed doc comment follows the target repository's own conventions — its own constraints document if it has one, and the conventions the surrounding code already follows.
   A line width is never inferred from the surrounding code.
-  A comment's line breaks and wrapping are never a finding; the gate's `lym loom lint-comments` alone checks them.
+  A comment's line breaks and wrapping are never a finding; the gate's comment lint alone checks them.
   This rubric checks compliance with the target repository's own standard, not loomyard's.
 - **Per-card mechanical check, with a plan.**
   Confirm every one of the card's own groups' type-specific mechanical checks actually ran and passed, each against that group's own targets, not just the first label's, per the per-type table in `{{.specs_dir}}/loom/loom-plan-spec.md` — not merely that the diff compiles and its tests pass.
@@ -85,11 +89,11 @@ Do not flag any of the following as a finding:
   Raise nothing when every declared entry lands, or when your directive declares none.
 - **The change description.**
   A claim in `_lym/landing/summary.md` that the diff does not bear out is a finding.
-- **An unrecorded parent correction, with a board entry snapshot.**
+- **An unrecorded parent correction, with a decision record alone.**
   A deviation from the amended board entry that the change description names as an unrecorded parent correction is never fixed by revert.
   File it as class `decision` at severity MEDIUM.
   Its fix text tells the fixer to leave the code in place and defer the finding to the run's parent, since its only sound change, recording or refusing the correction with `lym loom decision add`, is the parent's and lies outside the fixer's write surface.
-- **A step that edits the task's own board entry, with a board entry snapshot.**
+- **A step that edits the task's own board entry, with a decision record alone.**
   A step that changes this task's own board entry's body or scope is a finding, because the run's board lock refuses such a change.
   A step writing another entry, the entry's status or its `run_settings`, or changing board-module code is not flagged by this bullet.
   Such a step goes through `lym board` into the records repository, so the committed diff never shows it: the evidence is a claim in the change description that the run changed this task's own entry's body or scope, read as the writer's claim like the rest of that description.
@@ -97,14 +101,18 @@ Do not flag any of the following as a finding:
   A step left out through the writer's own-entry route is no scope finding once the record carries its `Added after Discussion` entry;
   before then the omission is an unrecorded parent correction, filed under that bullet as a MEDIUM `decision` finding deferred to the parent.
 - **Stencil wording.**
-  A diff that changes a stencil is read against the measuring stick, the plan card's `Intent` with a plan and the amended board entry with a snapshot; a rule the answer key did not ask to change that the diff drops, weakens or contradicts is a finding.
+  A diff that changes a stencil is read against the measuring stick, the plan card's `Intent` with a plan and the amended board entry with a decision record alone; a rule the answer key did not ask to change that the diff drops, weakens or contradicts is a finding.
+- **Wording criteria.**
+  Each criterion about wording in a stencil, spec, doc or other prose is checked here by reading that text as the diff leaves it, whether or not its bullet opens with `Review:`.
+  With a plan, the criteria are the decision record's `## Acceptance criteria`; with a decision record alone, they are what the amended board entry expects.
+  A wording the criterion asks for that the text does not carry is a finding naming the criterion; a test asserting the prose never stands in for this check.
 - **Test economy.**
   Each of these is a finding, and each names what grounds it:
   - a new test that duplicates an existing test's coverage, naming the covering test;
   - a per-helper test the public surface's test already covers, naming that public-surface test;
   - a review-fix test added for a finding that was not a coverage gap, naming that finding;
-  - a new assertion on a stencil's static prose, naming the assertion;
-  - a behavior the diff adds with no coverage, naming the uncovered behavior; a stencil's static prose is exempt.
+  - a new assertion on the static prose of a stencil, spec, doc or other text, naming the assertion;
+  - a behavior the diff adds with no coverage, naming the uncovered behavior; the static prose of a stencil, spec, doc or other text is exempt.
 
   A redundancy finding is raised only by naming the existing test that covers the behavior, so it cannot block on a vague suspicion.
 
@@ -116,7 +124,7 @@ When the note above is not `none`, this round reviews an amendment: review only 
 
 ## Review input
 
-When the amendment note names a review input, that file is a report written after this perch last settled: the merge fixer's report of the latest Parent-Align, or the overlap note of a Finalize reroute.
+When the amendment note names a review input, that file is a report written after this perch last settled: the merge fixer's report of the latest Parent-Align.
 Read it as an input besides the diff: judge from it whether the alignment it reports, and the parent changes it names, keep the code consistent with the answer key.
 A finding about the report itself is never raised; each finding is about the code.
 

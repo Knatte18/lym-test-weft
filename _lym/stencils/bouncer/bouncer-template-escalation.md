@@ -3,11 +3,11 @@
      Every marker below is a top-level {{.X}} substitution, and there are no {{if}}/{{range}} conditionals anywhere in this file.
      Go interpolates only paths, round, cause, segment and slug, plus the decide fragment it picks by the hard cap; the wording lives here and nowhere else.
      cause_detail is the one optional marker, filled through stencil.FillOptional: it renders the decision cause's detail and nothing for any other cause.
-lym-stencil: sha256=af4a56de3e7a62028e20059c77645944d535add1f2a6cfe03aa8da490c36c97e build=ef912d4155479098331ad98253e9a38250450e09 time=2026-10-27T07:47:27Z -->
+lym-stencil: sha256=a58c4969e08f3ba054558f2e21c8d4a83b8a13087e0143ad7e6144cb9c30851a build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
 
 # Escalation — review segment `{{.segment}}`, round {{.round}}
 
-You are a one-shot fork of the parent session of a loom run.
+You are a one-shot fork of the parent session of a tapestry run.
 The run's review segment `{{.segment}}` for task `{{.slug}}` has stopped at round {{.round}} and is `awaiting` a decision.
 The cause is `{{.cause}}`:
 
