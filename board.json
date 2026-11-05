@@ -64,26 +64,6 @@
       "brief": "Extend the FormatGreeting helper in services/api with default-name handling and a unit test.",
       "body": "## Background\n\nservices/api currently exposes a greeting helper used by main. We want callers to be able to pass an empty name and still get a friendly greeting.\n\n## What to do\n\n- Extend the FormatGreeting helper in services/api so an empty name falls back to a default name (\"friend\").\n- Keep the exported surface small: one exported function returning a greeting string.\n- Add a table-driven unit test covering the empty-name fallback and an ordinary name.\n\n## Acceptance\n\n- go build ./... and go test ./... pass in the worktree.\n- The helper is called from main.go so the package has a real consumer.",
       "status": "draft"
-    },
-    {
-      "id": 4,
-      "handle": "T5",
-      "slug": "codex-greet",
-      "title": "services/api prints a greeting through a Greeting helper",
-      "kind": "task",
-      "labels": [
-        "enhancement"
-      ],
-      "issues": [],
-      "recipe": "darn",
-      "depends_on": [],
-      "isolated": false,
-      "brief": "Add go.mod for services/api and a Greeting helper that main prints",
-      "body": "## Wanted\n\n- `services/api` gets its own `go.mod` (module `github.com/Knatte18/lym-test/services/api`, go 1.22) so it builds alone.\n- A function `Greeting(name string) string` in `services/api/greeting.go` returns `Hello, \u003cname\u003e!`, and `Hello, world!` for an empty or all-whitespace name.\n- `main` prints `Greeting(\"\")` to stdout.\n- `services/api/greeting_test.go` covers the named, empty and whitespace cases in one table test.\n",
-      "status": "done",
-      "created": "2026-11-05T09:10:09Z",
-      "revised": "2026-11-05T09:10:09Z",
-      "profile": "light"
     }
   ],
   "prime_owner": "neve",
