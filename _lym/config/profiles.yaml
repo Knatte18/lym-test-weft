@@ -14,6 +14,7 @@ defaults:
   darn: light
   pawl: light
   motif: solid
+  raddle: light
 speed:
   tapestry:
     loom: {discussion_max_bounces: 0, discussion_hard_max_bounces: 1, plan_max_bounces: 0, plan_hard_max_bounces: 1, code_max_bounces: 1, code_hard_max_bounces: 2, code_reviewer_fan: ""}
@@ -25,6 +26,8 @@ speed:
     loom: {discussion_max_bounces: 0, discussion_hard_max_bounces: 1}
   sampler:
     loom: {code_max_bounces: 0, code_hard_max_bounces: 1}
+  raddle:
+    loom: {raddle_auto_approve: false}
 light:
   tapestry:
     loom: {discussion_max_bounces: 1, discussion_hard_max_bounces: 2, plan_max_bounces: 1, plan_hard_max_bounces: 2, code_max_bounces: 1, code_hard_max_bounces: 2}
@@ -37,6 +40,8 @@ light:
   sampler:
     loom: {code_max_bounces: 1, code_hard_max_bounces: 2}
     sampler: {code_review: true}
+  raddle:
+    loom: {raddle_auto_approve: false}
 solid:
   tapestry:
     loom: {discussion_max_bounces: 2, discussion_hard_max_bounces: 3, plan_max_bounces: 2, plan_hard_max_bounces: 3, code_max_bounces: 1, code_hard_max_bounces: 2}
@@ -49,6 +54,8 @@ solid:
   sampler:
     loom: {code_max_bounces: 2, code_hard_max_bounces: 3}
     sampler: {code_review: true}
+  raddle:
+    loom: {raddle_auto_approve: false}
 wide:
   tapestry:
     loom: {discussion_max_bounces: 3, discussion_hard_max_bounces: 4, plan_max_bounces: 2, plan_hard_max_bounces: 3, code_max_bounces: 1, code_hard_max_bounces: 2}
@@ -61,6 +68,8 @@ wide:
   sampler:
     loom: {code_max_bounces: 3, code_hard_max_bounces: 4}
     sampler: {code_review: true}
+  raddle:
+    loom: {raddle_auto_approve: false}
 docs:
   darn:
     darn: {writer: "sonnet[medium]"}
