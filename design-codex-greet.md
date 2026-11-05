@@ -1,6 +1,6 @@
 # services/api prints a greeting through a Greeting helper
 
-`codex-greet` · Task · enhancement · running · Preflight
+`codex-greet` · Task · enhancement · running · Record-Write
 
 ## Wanted
 
