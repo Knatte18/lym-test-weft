@@ -6,21 +6,13 @@ Prime owner: `neve`.
 Tasks are grouped by dependency layer and notes by type.
 An entry waits only on the open entries it names under After, so the entries in one layer can run in parallel.
 
-## [P0 Root: entries under no project](project-root.md) (5)
+## [P0 Root: entries under no project](project-root.md) (4)
 
 Owner `neve`
 
-### Tasks (5)
+### Tasks (4)
 
 Concrete and claimable; only a task can run.
-
-#### Running (1)
-
-Held by a run; its scope is locked until the run ends.
-
-| # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | darn · light | Finalize | neve | 5h<br>5h |  |
 
 #### Ready (0)
 
@@ -42,3 +34,11 @@ Not released; nothing starts it until its status is cleared.
 ### Notes (0)
 
 Not tasks: ideas and observations, merged into a task when one is promoted.
+
+### Done (1)
+
+Finished, awaiting `lym board prune --apply`.
+
+| # | Entry | Slug | Age<br>Revised | Labels |
+| --- | --- | --- | --- | --- |
+| T5 | **services/api prints a greeting through a Greeting helper**<br>• Add go.mod for services/api and a Greeting helper that main prints | [`codex-greet`](design-codex-greet.md) | 5h<br>5h |  |
