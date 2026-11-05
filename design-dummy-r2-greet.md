@@ -1,3 +1,7 @@
+# Add a ComposeGreeting helper with default-name handling in services/api
+
+`dummy-r2-greet` · Task · enhancement · draft
+
 ## Background
 
 services/api currently exposes a greeting helper used by main. We want callers to be able to pass an empty name and still get a friendly greeting.

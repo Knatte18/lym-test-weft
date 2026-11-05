@@ -1,3 +1,7 @@
+# Add a farewell path alongside ComposeGreeting in services/api
+
+`r4-crash-hub` · Task · enhancement · draft
+
 `services/api/main.go` currently exposes `ComposeGreeting(name string) string`, which returns `Hello, <name>!` and defaults an empty name to `world`.
 
 Add a parallel farewell path, in three independently-committable steps, each of which must compile and pass `go test ./...` on its own:

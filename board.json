@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": 0,
+      "handle": "T1",
+      "slug": "glyph-demo-greet",
+      "title": "Add and rename a greeting helper in services/api",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "depends_on": [],
+      "isolated": false,
+      "brief": "Add a small greeting helper, call it from main, then rename it to a clearer name.",
+      "body": "In services/api/main.go, add a new exported helper function in that same package that builds and returns a short greeting string (e.g. given a name, returns a greeting message). Update main() to call this new helper so it is actually used (printing the result is fine). Once that is in place, rename the helper to a more descriptive name that better reflects what it does. Keep the change minimal and scoped to services/api -- no new files or packages needed beyond what main.go already has, unless a bundled test file is appropriate for the new helper.",
+      "status": "draft"
+    },
+    {
+      "id": 1,
+      "handle": "T2",
+      "slug": "glyph-rename-format",
+      "title": "Rename FormatGreeting to ComposeGreeting in services/api",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "depends_on": [],
+      "isolated": false,
+      "brief": "Pure rename of an existing exported helper to a clearer name",
+      "body": "The exported helper `FormatGreeting` in `services/api/main.go` has a name that under-describes what it does — it composes the whole greeting sentence, not merely formats one. Rename the existing exported function `FormatGreeting` to `ComposeGreeting`, updating its call site in `main()` and every reference in its existing table-driven test. This is a PURE RENAME task: no new behavior, no new symbols beyond the renamed one, no signature change. Preserve git history with surgical edits (identifier retargeting only).",
+      "status": "draft"
+    },
+    {
+      "id": 2,
+      "handle": "T3",
+      "slug": "r4-crash-hub",
+      "title": "Add a farewell path alongside ComposeGreeting in services/api",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "depends_on": [],
+      "isolated": false,
+      "brief": "Extract a defaultName helper, add ComposeFarewell, and cover it with a table-driven test.",
+      "body": "`services/api/main.go` currently exposes `ComposeGreeting(name string) string`, which returns `Hello, \u003cname\u003e!` and defaults an empty name to `world`.\n\nAdd a parallel farewell path, in three independently-committable steps, each of which must compile and pass `go test ./...` on its own:\n\n1. Add a new unexported helper `defaultName(name string) string` in `services/api/main.go` that returns `world` when `name` is empty and `name` otherwise, and change `ComposeGreeting` to call it instead of inlining the empty check.\n2. Add a new exported `ComposeFarewell(name string) string` in `services/api/main.go` that returns `Goodbye, \u003cname\u003e!` and uses the same `defaultName` helper.\n3. Extend `services/api/main_test.go` with a table-driven `TestComposeFarewell` covering the same three cases the existing `TestComposeGreeting` covers, and update `main()` to print both the greeting and the farewell.\n\nNo other files change. No new packages, no new files beyond what already exists. Keep every step compiling and independently committable.",
+      "status": "draft"
+    },
+    {
+      "id": 3,
+      "handle": "T4",
+      "slug": "dummy-r2-greet",
+      "title": "Add a ComposeGreeting helper with default-name handling in services/api",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "depends_on": [],
+      "isolated": false,
+      "brief": "Extend the FormatGreeting helper in services/api with default-name handling and a unit test.",
+      "body": "## Background\n\nservices/api currently exposes a greeting helper used by main. We want callers to be able to pass an empty name and still get a friendly greeting.\n\n## What to do\n\n- Extend the FormatGreeting helper in services/api so an empty name falls back to a default name (\"friend\").\n- Keep the exported surface small: one exported function returning a greeting string.\n- Add a table-driven unit test covering the empty-name fallback and an ordinary name.\n\n## Acceptance\n\n- go build ./... and go test ./... pass in the worktree.\n- The helper is called from main.go so the package has a real consumer.",
+      "status": "draft"
+    },
+    {
+      "id": 4,
+      "handle": "T5",
+      "slug": "codex-greet",
+      "title": "services/api prints a greeting through a Greeting helper",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "recipe": "darn",
+      "depends_on": [],
+      "isolated": false,
+      "brief": "Add go.mod for services/api and a Greeting helper that main prints",
+      "body": "## Wanted\n\n- `services/api` gets its own `go.mod` (module `github.com/Knatte18/lym-test/services/api`, go 1.22) so it builds alone.\n- A function `Greeting(name string) string` in `services/api/greeting.go` returns `Hello, \u003cname\u003e!`, and `Hello, world!` for an empty or all-whitespace name.\n- `main` prints `Greeting(\"\")` to stdout.\n- `services/api/greeting_test.go` covers the named, empty and whitespace cases in one table test.\n",
+      "status": "draft",
+      "created": "2026-11-05T09:10:09Z",
+      "revised": "2026-11-05T09:10:09Z",
+      "profile": "light"
+    }
+  ],
+  "draft_status": true
+}
