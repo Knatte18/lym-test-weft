@@ -1,0 +1,16 @@
+{
+  "number": 1,
+  "stop_key": {
+    "current_producer": "Darn-Write",
+    "history_length": 5,
+    "state": "blocked"
+  },
+  "pause_before": "",
+  "pause_after": "",
+  "spawned_at": "2026-11-05T10:17:20.437771409+01:00",
+  "deadline": "2026-11-05T10:47:20.437771409+01:00",
+  "strand_guid": "edd9ac330a257c435726a9bd7c1a536c",
+  "envelope_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-envelope-20261105-101631-2ec6.json",
+  "report_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-report-20261105-101720-c11f.md",
+  "case_brief_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-2/case-brief.md"
+}

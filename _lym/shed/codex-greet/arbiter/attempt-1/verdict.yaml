@@ -1,0 +1,16 @@
+verdict: hand-on
+reason: |-
+  The writer did try to commit, three times, and git refused it each time. The transcript is the codex rollout /home/knatte/.codex/sessions/2026/11/05/rollout-2026-11-05T10-11-18-01a1aafa-15e4-7721-9a74-5f03119fc17b.jsonl. It shows three `git commit` calls, each failing with
+  "fatal: Unable to create '/home/knatte/Code/lym-test-LYMHUB/lym-test/.git/worktrees/codex-greet/index.lock': Read-only file system".
+  The codex session ran with sandbox_policy workspace-write. Its writable_roots listed only /home/knatte/Code/lym-test-LYMHUB/codex-greet-weft, plus the session's cwd.
+  This worktree's git dir is /home/knatte/Code/lym-test-LYMHUB/lym-test/.git/worktrees/codex-greet, and its common dir is /home/knatte/Code/lym-test-LYMHUB/lym-test/.git. Both lie outside the sandbox's writable roots, so the codex engine cannot commit in a linked worktree.
+  The same transcript also shows a `go test` run ending in "[setup failed]" on a read-only file system, so the sandbox blocks more than the commit.
+  The case brief's guess of a commit hook or an identity fault is wrong. user.name and user.email are set, core.hooksPath is unset, and the only active hook is post-checkout.
+  The task is not at fault: the five uncommitted paths are exactly what the board entry asks for.
+  A plain re-launch, or a goto back to Darn-Write, would spawn codex under the same sandbox and fail the same way. The fix is in the engine configuration, which is outside this run's repair verbs and needs an operator call.
+verbs:
+  - |-
+    lym board get '{"slug":"codex-greet"}'
+question: |-
+  Darn-Write's codex session cannot commit. Its workspace-write sandbox leaves the worktree's git dir read-only: /home/knatte/Code/lym-test-LYMHUB/lym-test/.git/worktrees/codex-greet and the common dir /home/knatte/Code/lym-test-LYMHUB/lym-test/.git. Every `git commit` fails on index.lock with "Read-only file system".
+  How should the run get past this? The options I see are to add the git common dir to the codex engine's writable roots, to re-run Darn-Write on another engine, or to commit the five services/api paths outside the writer and then resume.

@@ -1,0 +1,22 @@
+{
+  "number": 2,
+  "stop_key": {
+    "current_producer": "Darn-Write",
+    "history_length": 5,
+    "state": "blocked"
+  },
+  "pause_before": "",
+  "pause_after": "",
+  "snapshot": {
+    "head": "e21d5d55de65305ff0b2e736827a42afdd58168b",
+    "branch": "codex-greet",
+    "dirty": {
+      "/home/knatte/Code/lym-test-LYMHUB/codex-greet/services/api/main.go": "4434ac0e31e235a1fa9b4cab9611f3141c504a5797a97b8c81ac6ac0206c4b11"
+    }
+  },
+  "spawned_at": "2026-11-05T10:16:31.892022847+01:00",
+  "deadline": "2026-11-05T10:26:31.892022847+01:00",
+  "envelope_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-envelope-20261105-101631-2ec6.json",
+  "report_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/drive-reports/drive-report-20261105-101631-d219.md",
+  "strand_guid": "852356af6f29ec785acd1ca664f869b9"
+}

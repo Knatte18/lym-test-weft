@@ -1,0 +1,11 @@
+{
+  "verdict": "escalate",
+  "reason": "The blocked stop at Darn-Write (trace 00e17e0c8c0a5a9b) names its symptom: five paths in services/api are uncommitted, and the gate re-prompted the writer three times with the same finding. The cause of the writer's refusal to commit is not named from what I read. The writer's run dir and transcript are gone (cleanedUp=true), and no commit error appears in the traces. A plain re-launch carries no evidence of changing the outcome after three identical failures. The case needs a stronger judge to read the writer's behaviour or run a commit check; see the case brief.",
+  "question": "",
+  "goto": "",
+  "cause": "",
+  "attempt": 2,
+  "attempt_dir": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-2",
+  "verdict_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-2/verdict.yaml",
+  "case_brief_path": "/home/knatte/Code/lym-test-LYMHUB/codex-greet/_lym/shed/codex-greet/tackler/attempt-2/case-brief.md"
+}
