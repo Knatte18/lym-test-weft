@@ -1,15 +1,22 @@
 {
-  "current_producer": "Preflight",
+  "current_producer": "Record-Write",
   "state": "running",
   "error": "",
-  "pending_by": "shed",
   "pause_requested": false,
   "activity": {
-    "now": "Preflight",
-    "last": "",
+    "now": "Record-Write",
+    "last": "Preflight → done",
     "wait": ""
   },
-  "history": [],
+  "history": [
+    {
+      "producer": "Preflight",
+      "outcome": "done",
+      "output": "",
+      "at": "2026-11-05T09:11:07Z",
+      "by": "shed"
+    }
+  ],
   "product": {
     "slug": "codex-greet",
     "parent": "main",
