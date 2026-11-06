@@ -74,3 +74,4 @@ docs:
   darn:
     darn: {writer: "sonnet[medium]"}
     loom: {code_max_bounces: 1, code_hard_max_bounces: 2, code_reviewer_fan: ""}
+    drift: {scope: "off"}
