@@ -1,1 +1,2 @@
-plan: opus[effort=high] # model-spec for the plan-phase producer agent (see contracts/specs/llm-model-spec.md)
+plan:
+    model: opus[effort=high] # model-spec for the plan-phase producer agent (see contracts/specs/llm-model-spec.md)

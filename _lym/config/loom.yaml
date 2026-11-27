@@ -1,3 +1,6 @@
-discussion: opus[effort=high] # model-spec for the discussion-phase interview agent (see contracts/specs/llm-model-spec.md)
-reviewer_model: opus[effort=high] # model-spec for the reviewer of every review segment round whose own <segment>_reviewer_model is empty (see contracts/specs/llm-model-spec.md); a YAML list sets one model per round, with the last entry for every later round
-code_hard_max_bounces: 4 # hard cap of the Code-Review perch: a round numbered at or past it is never continued, it is accepted or escalated hard-cap; 0 takes review_hard_max_bounces
+discussion:
+    model: opus[effort=high] # model-spec for the discussion-phase interview agent (see contracts/specs/llm-model-spec.md)
+code:
+    hard_max_bounces: 4 # hard cap of the Code-Review perch: a round numbered at or past it is never continued, it is accepted or escalated hard-cap; 0 takes review_hard_max_bounces
+review:
+    reviewer_model: opus[effort=high] # model-spec for the reviewer of every review segment round whose own <segment>_reviewer_model is empty (see contracts/specs/llm-model-spec.md); a YAML list sets one model per round, with the last entry for every later round
