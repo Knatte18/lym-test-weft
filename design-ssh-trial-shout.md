@@ -1,6 +1,6 @@
 # SSH trial: add a ShoutGreeting helper in services/api
 
-`ssh-trial-shout` · Task · enhancement · starting · Worktree-Create
+`ssh-trial-shout` · Task · enhancement · starting · Seed-Child
 
 ## Aim (operator, 2026-11-27)
 
