@@ -80,7 +80,7 @@
       "isolated": false,
       "brief": "",
       "body": "## Aim (operator, 2026-11-27)\n\nA trial of lym over SSH: this hub's code and weft remotes were switched to git@github.com URLs today.\nThe change itself is small: add a `ShoutGreeting(name string) string` helper in services/api that returns the greeting upper-cased, with one test.\n\nThe trial passes when the run goes from Worktree-Create through landing and teardown with every push, fetch and ls-remote over SSH and no stop from transport.\nThe change description names any step that failed over SSH, with its error.\n",
-      "status": "running · Darn-Write",
+      "status": "running · Drift-Verify",
       "created": "2026-11-27T15:47:39Z",
       "revised": "2026-11-27T15:47:39Z",
       "profile": "light"
