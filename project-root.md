@@ -14,7 +14,7 @@ An entry waits only on the open entries it names under After, so the entries in 
 
 | # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light | starting · Open-IDE | neve | 0m<br>0m |  |
+| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light | Preflight | neve | 1m<br>1m |  |
 
 ## Draft (4)
 
