@@ -1,11 +1,11 @@
 {
-  "current_producer": "Darn-Write",
+  "current_producer": "Drift-Verify",
   "state": "running",
   "error": "",
   "pause_requested": false,
   "activity": {
-    "now": "Darn-Write",
-    "last": "Drift-Expect → skipped",
+    "now": "Drift-Verify",
+    "last": "Darn-Write → done",
     "wait": ""
   },
   "history": [
@@ -43,6 +43,46 @@
       "output": "",
       "at": "2026-11-27T15:52:46Z",
       "reason": "drift.enabled = false"
+    },
+    {
+      "producer": "Darn-Write",
+      "outcome": "done",
+      "output": "/home/knatte/Code/lym-test-LYMHUB/ssh-trial-shout/_lym/landing/summary.md",
+      "at": "2026-11-27T15:53:52Z",
+      "started_at": "2026-11-27T15:52:46Z",
+      "gate_attempts": 0,
+      "gate_spans": [
+        {
+          "gate": "clean",
+          "kind": "gate",
+          "start": "2026-11-27T15:53:45.556880777Z",
+          "end": "2026-11-27T15:53:45.566338037Z"
+        },
+        {
+          "gate": "verify",
+          "kind": "gate",
+          "start": "2026-11-27T15:53:46.252666508Z",
+          "end": "2026-11-27T15:53:48.667396327Z"
+        },
+        {
+          "gate": "red-first",
+          "kind": "gate",
+          "start": "2026-11-27T15:53:49.093375405Z",
+          "end": "2026-11-27T15:53:49.097525016Z"
+        },
+        {
+          "gate": "drift",
+          "kind": "gate",
+          "start": "2026-11-27T15:53:49.557774746Z",
+          "end": "2026-11-27T15:53:49.567703718Z"
+        },
+        {
+          "gate": "description",
+          "kind": "gate",
+          "start": "2026-11-27T15:53:50.420467159Z",
+          "end": "2026-11-27T15:53:50.420947187Z"
+        }
+      ]
     }
   ],
   "product": {
