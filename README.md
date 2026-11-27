@@ -18,7 +18,7 @@ Autonomy _off_ (hub-wide) · PR setting **off**
 
 | # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light | PR-Review | neve | 11m<br>11m |  |
+| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light | landing · Finalize | neve | 11m<br>11m |  |
 
 ### Draft (4)
 
