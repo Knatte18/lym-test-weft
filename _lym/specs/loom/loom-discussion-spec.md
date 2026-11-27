@@ -1,4 +1,4 @@
-<!-- lym-stencil: sha256=22608df8957206cccfa6a0429b5d45d81186bef3f76485be01d8c15d0cb4fe9b build=f7465bd86b31478590683d0377771fca4647c425 time=2026-11-07T11:35:39Z -->
+<!-- lym-stencil: sha256=3c6d4f2c849fe5f4ad0d6219abf322362e36e4e40908c027fcd069ee98714681 build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Discussion spec — the decision record, the support log and the relevant list
 
@@ -55,10 +55,17 @@ A record without the section is valid.
 Each decision under `## Decisions` is one H3 headed `### D<n> — <title>`.
 `n` is a positive integer, and ids are unique within the record.
 An `### Added after Discussion` entry carries no id.
+An entry that drops a plan card's Create target carries one line `` Drops Create: `<target>` `` per target, after its Rationale paragraph.
+`<target>` is spelled as the card spells it, and `lym loom decision add --drops-create` writes the line;
+Webster's done-check skips a target some entry drops.
 Any other H3 there is refused as a `decision-heading-malformed` finding.
 A repeated id is a `decision-id-duplicate` finding.
 Each id appears as a whole word in a bullet of `## Acceptance criteria`.
 So `D1` is not met by `D10`, and a range such as "D1 to D4" covers only the ids it spells.
+A bullet runs on through the lines after it up to a blank line, the next bullet or a fenced line,
+and any other indented line continues it.
+An unindented line continues it as markdown's lazy continuation does,
+unless it is an ATX heading, a thematic break or a blockquote, or opens an HTML block that can interrupt a paragraph.
 An id no bullet names is a `decision-not-in-acceptance` finding.
 Both checks run for every loom record, in the discussion gates, Darn-Write's post-session guard and `lym loom validate-discussion`.
 They do not run in `lym loom decision add`.
@@ -114,12 +121,32 @@ The Discussion-Write and Discussion-Burler-Fix gates halt on a quarry outage as 
 - **A criterion is behavior a test can check, or a review check.**
   A criterion that a stencil, spec, doc or other prose names, says or contains a wording opens its bullet with `Review:`.
   The code review checks it by reading the text the diff leaves, and no test asserts that prose.
+- **`## Acceptance criteria` names what a reviewer of the landed change will check by hand.**
+  It names each figure the change must measure and state, with the case it is measured on and where the figure is stated;
+  each doc statement the change must make true, as a `Review:` bullet naming the doc;
+  and the intent of each test the change adds: the behavior it pins and its tier.
+  A criterion left for the reviewer to infer is checked only after the scope has closed, when no fix enters this task.
 - **A Decision that adds an edge or weakens a guard states its bound.**
   A Decision that adds a verb, flag, escape hatch or routing edge states what it can skip or let through and what bounds it.
   The same holds for a Decision that removes, downgrades or makes bypassable a guard.
   The discussion review flags one left unbounded.
 - **No italic prose-coaching.**
   Write terse, structured prose the plan writer can act on, not a template with meta-commentary about how to fill it in.
+
+### A bug entry's record
+
+The Discussion-Write lead's record for a `bug` entry states up front what the red-first gate later checks:
+
+- `## Goal` names the observed fault and the steps that reproduce it.
+- `## Constraints` states the root cause and the evidence it rests on, or names what is still unknown about it.
+- An `## Acceptance criteria` bullet names the test that fails on the merge base and passes after the fix,
+  states why no test seam exists, or states that the entry fixes no bug.
+  The test reaches the bug through code the merge base already has.
+
+A record's statement that no test seam exists does not lift the red-first gate;
+only the parent's `### Added after Discussion` entry whose title opens `No test seam` does.
+A `bug` entry that fixes no bug, such as one that only adds tests pinning existing behaviour,
+is lifted the same way by the parent's added entry whose title opens `No bug fixed`.
 
 ### Parts no writer authors
 
@@ -131,6 +158,12 @@ The Discussion-Write and Discussion-Burler-Fix gates halt on a quarry outage as 
   That check runs on every loom record, after the section check is clean:
   in the discussion gates, in Darn-Write's post-session guard and in `lym loom validate-discussion`, which commits nothing.
   An ID a `Withdraws:` line of an `### Added after Discussion` entry names is permanently exempt from it.
+- `lym loom decision replace` may remove an `### Added after Discussion` entry, never edit or insert one, and may drop an appended bullet.
+  The dropped-entry check reads the record's versions back to the newest replace only, so an entry or bullet a replace dropped is no finding.
+  The parent replaces a record to change or withdraw an earlier decision, folding the added entries into the main decisions,
+  and records a new call with `lym loom decision add`.
+  The record stored on a discussed board entry holds added entries once a motif run has made it;
+  that record is folded with `lym board upsert --record-file`.
 - `<!-- lym:carry-over … -->` blocks under `## Open risks` are written only by Go.
   A writer never authors, edits or removes one.
 
