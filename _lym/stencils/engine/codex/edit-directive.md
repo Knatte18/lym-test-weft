@@ -2,7 +2,7 @@
      internal/editdirective.Directive renders it into the edit_directive marker of every spawned role's opening stencil
      whose prompt launches on Codex.
      It declares no marker and must stay marker-free.
-lym-stencil: sha256=59ac515cf7814e180f24820a8c3ecb61032a7576d62740c87d2facda5cb4663c build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
+lym-stencil: sha256=a911369a8d871dc90cc1c7bd69b121ebe1a8e874f7e9c961611976014677c0fa build=3fb0787e32473e6bd8d961da278a4bcecb4d2460 time=2026-11-27T21:24:06Z -->
 
 ## Editing files
 
@@ -21,4 +21,6 @@ never build, restore or compile anything under them, and never create a git work
 A build under the `.scratch` link sees each project under two paths and fails.
 A scratch file with a source extension such as `.md`, `.yaml` or `.sh` is written with `apply_patch`, not by a redirect.
 Work only in your own worktree: never edit, commit or push in another, and never create one, unless your parent or the operator says so for that case.
+Pushing your own worktree's commits is allowed.
+If such a push fails, leave it: lym pushes your commits later, so a failed push asks nothing of you.
 When work belongs in another worktree, say so to your parent instead.
