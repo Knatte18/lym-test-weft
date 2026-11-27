@@ -1,6 +1,6 @@
 # Board
 
-Rendered 2026-11-27 15:51 UTC; every age below is as of then.
+Rendered 2026-11-27 15:52 UTC; every age below is as of then.
 Prime owner: `neve`.
 
 Hub-wide default: autonomy `off` · PR setting `off`.
@@ -14,11 +14,11 @@ Owner `neve`
 
 Autonomy _off_ (hub-wide) · PR setting **off**
 
-### Ready (1)
+### Running (1)
 
-| # | Task | Slug | Recipe | After | Age<br>Revised | Labels |
-| --- | --- | --- | --- | --- | --- | --- |
-| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light |  | 4m<br>4m |  |
+| # | Task | Slug | Recipe | At | Owner | Age<br>Revised | Labels |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| T5 | **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light | starting · Worktree-Create | neve | 4m<br>4m |  |
 
 ### Draft (4)
 
