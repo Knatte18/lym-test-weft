@@ -64,6 +64,26 @@
       "brief": "Extend the FormatGreeting helper in services/api with default-name handling and a unit test.",
       "body": "## Background\n\nservices/api currently exposes a greeting helper used by main. We want callers to be able to pass an empty name and still get a friendly greeting.\n\n## What to do\n\n- Extend the FormatGreeting helper in services/api so an empty name falls back to a default name (\"friend\").\n- Keep the exported surface small: one exported function returning a greeting string.\n- Add a table-driven unit test covering the empty-name fallback and an ordinary name.\n\n## Acceptance\n\n- go build ./... and go test ./... pass in the worktree.\n- The helper is called from main.go so the package has a real consumer.",
       "status": "draft"
+    },
+    {
+      "id": 4,
+      "handle": "T5",
+      "slug": "ssh-trial-shout",
+      "title": "SSH trial: add a ShoutGreeting helper in services/api",
+      "kind": "task",
+      "labels": [
+        "enhancement"
+      ],
+      "issues": [],
+      "recipe": "darn",
+      "depends_on": [],
+      "isolated": false,
+      "brief": "",
+      "body": "## Aim (operator, 2026-11-27)\n\nA trial of lym over SSH: this hub's code and weft remotes were switched to git@github.com URLs today.\nThe change itself is small: add a `ShoutGreeting(name string) string` helper in services/api that returns the greeting upper-cased, with one test.\n\nThe trial passes when the run goes from Worktree-Create through landing and teardown with every push, fetch and ls-remote over SSH and no stop from transport.\nThe change description names any step that failed over SSH, with its error.\n",
+      "status": "draft",
+      "created": "2026-11-27T15:47:39Z",
+      "revised": "2026-11-27T15:47:39Z",
+      "profile": "light"
     }
   ],
   "prime_owner": "neve",

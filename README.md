@@ -1,28 +1,20 @@
 # Board
 
-Rendered 2026-11-05 14:14 UTC; every age below is as of then.
+Rendered 2026-11-27 15:47 UTC; every age below is as of then.
 Prime owner: `neve`.
+
+Hub-wide default: autonomy `off` · PR setting `off`.
 
 Tasks are grouped by dependency layer and notes by type.
 An entry waits only on the open entries it names under After, so the entries in one layer can run in parallel.
 
-## [P0 Root: entries under no project](project-root.md) (4)
+## [P0 Root: entries under no project](project-root.md) (5)
 
 Owner `neve`
 
-### Tasks (4)
+Autonomy _off_ (hub-wide) · PR setting **off**
 
-Concrete and claimable; only a task can run.
-
-#### Ready (0)
-
-Waits on nothing open; can start now.
-
-_None._
-
-#### Draft (4)
-
-Not released; nothing starts it until its status is cleared.
+### Draft (5)
 
 | # | Task | Slug | Recipe | After | Age<br>Revised | Labels |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -30,7 +22,4 @@ Not released; nothing starts it until its status is cleared.
 | T2 | `draft` **Rename FormatGreeting to ComposeGreeting in services/api**<br>• Pure rename of an existing exported helper to a clearer name | [`glyph-rename-format`](design-glyph-rename-format.md) | darn |  |  |  |
 | T3 | `draft` **Add a farewell path alongside ComposeGreeting in services/api**<br>• Extract a defaultName helper, add ComposeFarewell, and cover it with a table-driven test. | [`r4-crash-hub`](design-r4-crash-hub.md) | darn |  |  |  |
 | T4 | `draft` **Add a ComposeGreeting helper with default-name handling in services/api**<br>• Extend the FormatGreeting helper in services/api with default-name handling and a unit test. | [`dummy-r2-greet`](design-dummy-r2-greet.md) | darn |  |  |  |
-
-### Notes (0)
-
-Not tasks: ideas and observations, merged into a task when one is promoted.
+| T5 | `draft` **SSH trial: add a ShoutGreeting helper in services/api** | [`ssh-trial-shout`](design-ssh-trial-shout.md) | darn · light |  | 0m<br>0m |  |
