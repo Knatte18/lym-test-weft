@@ -1,8 +1,10 @@
-<!-- This is the job body of the cold fixer for the Discussion-Write row's gate, joined behind the shared cold frame gatefix-frame-cold by internal/gatefixer's RenderPrompt and filled via internal/stencil.
-     Its four markers are required top-level {{.X}} substitutions ({{.decision_record_path}}, {{.support_log_path}}, {{.relevant_path}}, {{.recheck_command}});
-     stencil.FillOptional requires all of them non-empty.
-     There are no {{if}}/{{range}} conditionals anywhere in this file.
-lym-stencil: sha256=d1d607017fd9b534047f331ea3b99ea89b219af0ca16a0151a9089de79b2c99e build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+<!-- This is the job body of the cold fixer for the Discussion-Write row's gate.
+     internal/gatefixer's RenderPrompt joins it behind the shared cold frame gatefix-frame-cold and fills it via internal/stencil.
+     Its markers are required top-level {{.X}} substitutions
+     ({{.decision_record_path}}, {{.support_log_path}}, {{.relevant_path}}, {{.recheck_command}}),
+     and stencil.FillOptional requires each to be non-empty.
+     There are no {{if}}/{{range}} conditionals in this file.
+lym-stencil: sha256=acf4ccccf62808c1b1c08097801cd3249475fb00230aab464510f3296473e38f build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 ## The failure
 
@@ -11,8 +13,8 @@ You fix the discussion files the failures point at.
 
 ## The rules
 
-You run every Bash command from the repository's worktree root, with paths worktree-relative, and follow the gate rule in your system prompt for `cd` and for quick checks.
-Paths you pass to the Read, Write and Edit tools stay absolute.
+You run every Bash command from the repository's worktree root, with paths worktree-relative, and follow the gate rule in {{template "engine-standing-instructions"}} for `cd` and for quick checks.
+{{template "engine-absolute-paths"}}
 You never run a Bash call in the background.
 
 - Read the file behind each failure before you change it, and fix every failure you can in one pass.

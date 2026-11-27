@@ -14,7 +14,7 @@
      the fix half is spawned only once the review is accepted on disk, and never waits on or messages the review half.
      It never repeats the review-file format, which lives in the file review_format_path names,
      nor the fix-everything body, which lives in the fix step.
-lym-stencil: sha256=adbc1e55298a631254f5beef1d6cfbb97c489a80ed1fb738ec4c9fb705795b70 build=9c0149af1de444a2ad91d6ebd133a3d2e93fbef5 time=2026-11-08T11:43:14Z -->
+lym-stencil: sha256=045b2e812d0223532e5be973c2e81ab3cc18a04a72869087fc9038ba8dce2210 build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Burler — fix
 
@@ -36,6 +36,21 @@ The review is already written and accepted on disk; you hold none of the reviewe
    Read and execute `{{.instruction_fix_path}}`: the fix-everything rule, your write surface and the fixer-report.
 
 Read the fix step only when its step is reached, never early.
+
+## External tools and processes
+
+Learn how an external tool such as tmux behaves from a test in the repository, in the tier the hub runs that tool's tests in, never from processes you start in the shell.
+Run that one test through `lym gate test --tier <that tier>` with its package and, after `--`, a filter that selects it, and check that the gate's report shows the test ran, not skipped.
+Never start a background or detached process from the shell: such a process outlives your command and runs outside every memory cap lym sets.
+
+When `lym gate test` refuses to run any tier, no change to your own call clears the refusal,
+and its way forward is a change to the hub's gate config, as on a hub that declares no tier0, the round has no gate.
+Run no raw test command in its place:
+check that each package or project you changed still compiles, with the build or vet command its language uses on that one package,
+and name the refusal in the fixer-report's deferred section, so your parent takes the step the refusal names.
+A refusal that a change to your own call clears, such as dropping a word after `--`, is no such case,
+even when its way forward names the config:
+change the call and run the gate again.
 
 ## What you may write (BLOCKING)
 

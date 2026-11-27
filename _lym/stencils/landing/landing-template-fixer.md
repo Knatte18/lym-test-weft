@@ -1,10 +1,15 @@
-<!-- This is the landing merge fixer session's entire instruction set. It is shipped as an embedded
-     default in the top-level stencils package (stencils/stencils.go), seeded to
-     the Bolt checkout's `_lym/stencils/landing/`, and read from there at call time by internal/seatengine,
-     which fills it from the lead's value map that landingshed's FixerTable builds, then hands it to shuttle as the fixing agent's whole
-     prompt. Every marker below is a top-level {{.X}} substitution; stencil.FillWith requires every
-     marker non-empty except the table's Optional values (plan_dir, failure_record_path, fix_review_path and, in finalize mode, aligned_tip), parent_directive (rendered by internal/parentdirective) and edit_directive (rendered unconditionally by internal/editdirective) included, and there are no {{if}}/{{range}} conditionals anywhere in this file.
-lym-stencil: sha256=d1467a10080fab655c29836f173b771a0e777137f54d71b65bf53a98520a29a5 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+<!-- This is the landing merge fixer session's entire instruction set.
+     It is shipped as an embedded default in the top-level stencils package (stencils/stencils.go),
+     seeded to the Bolt checkout's `_lym/stencils/landing/`.
+     internal/seatengine reads it from there at call time.
+     It fills the template from the lead's value map, which landingshed's FixerTable builds.
+     It then hands the result to shuttle as the fixing agent's whole prompt.
+     Every marker below is a top-level {{.X}} substitution.
+     stencil.FillWith requires each to be non-empty except the table's Optional values:
+     plan_dir, failure_record_path, fix_review_path and, in finalize mode, aligned_tip.
+     internal/parentdirective renders parent_directive, and internal/editdirective renders edit_directive unconditionally.
+     There are no {{if}}/{{range}} conditionals in this file.
+lym-stencil: sha256=4edf42788a46108cc33b8b26cd1b14edf07d3f70314625654becc6b1e5f66ffb build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Merge fixer — fix the merge or the failing tests on the task branch
 
@@ -41,6 +46,16 @@ When the landing failure record holds `build: true`, the gate failed in its buil
 - Fix and commit on the task branch `{{.task_branch}}`, one commit per fix.
 - Never push.
 - Leave the working tree clean when you end your turn.
+
+{{template "loom-fragment-loosened-check"}}
+
+{{template "loom-fragment-tooling-names"}}
+
+## External tools and processes
+
+Learn how an external tool such as tmux behaves from a test in the repository, in the tier the hub runs that tool's tests in, never from processes you start in the shell.
+Run that one test through `lym gate test --tier <that tier>` with its package and, after `--`, a filter that selects it, and check that the gate's report shows the test ran, not skipped.
+Never start a background or detached process from the shell: such a process outlives your command and runs outside every memory cap lym sets.
 
 ## The report — your terminal act
 

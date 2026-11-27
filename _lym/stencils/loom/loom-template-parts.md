@@ -1,9 +1,11 @@
-<!-- This is the loom Parts-Write producer's autonomous prompt: one lead seat, built by internal/loomengine's PartsTable and filled by internal/seatengine from the lead's value map.
-     parent_directive, edit_directive, decision_record_path, relevant_path, parts_path, parts_dir, parts_max, depth_block and specs_dir are required markers;
-     depth_block holds the loom-fragment-parts-light or loom-fragment-parts-medium stencil that tapestry.yaml's parts_depth names.
+<!-- This is the loom Parts-Write producer's autonomous prompt, a single lead seat.
+     internal/loomengine's PartsTable builds the seat, and internal/seatengine fills it from the lead's value map.
+     The directive markers parent_directive and edit_directive are required.
+     So are decision_record_path, relevant_path, parts_path, parts_dir, parts_max, depth_block and specs_dir.
+     depth_block holds the stencil that tapestry.parts.depth names: loom-fragment-parts-light or loom-fragment-parts-medium.
      pattern_directive and friction_directive are optional and render as nothing when their tier is inactive.
      The parts format's Go contract is contracts/specs/loom-parts-spec.md; this stencil carries its LLM-facing subset.
-lym-stencil: sha256=76b56ab013de02a3557e41b12380f777520f5e5be954f5449dad03552541c265 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+lym-stencil: sha256=cd9c32bd59001b712517ce4fb8ded49d86a7ee6eac5f73e2506d19e4f0b11a31 build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Parts — split the task into parts with contracts
 
@@ -105,6 +107,6 @@ Run `lym loom validate-parts`, which takes no arguments, and fix every finding i
 Besides the format, it refuses an export that already exists and runs on each `plan:` export the name checks its writer's card will face.
 Your turn ends once the parts file passes.
 
-## Never use `AskUserQuestion`
+## Never use {{template "engine-question-tool"}}
 
-Never call the `AskUserQuestion` tool: this session is autonomous, and no operator is present.
+Never call the {{template "engine-question-tool"}} tool: this session is autonomous, and no operator is present.

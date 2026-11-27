@@ -1,11 +1,10 @@
-<!-- This is the Discussion-Review rubric. It is read by the Bouncer row and the review row of the Discussion-Review perch:
-     the Discussion-Bouncer row interpolates it as bouncer-template-seed.md's and
-     bouncer-template-judge.md's rubric marker value, and the Discussion-Burler-Review row interpolates it
-     the same way into internal/burlerengine's own review prompt.
-     It is a marker VALUE, never a template -- its only markers are the ones ReadRubric fills, and
-     internal/stencil's StripLeadingComment removes this leading comment before either consumer ever
-     sees it.
-lym-stencil: sha256=6e3b5c146ec0564f63d532ad070e35f6903bead31506a5cbf862c5e6ce30fab8 build=ef912d4155479098331ad98253e9a38250450e09 time=2026-10-27T07:47:27Z -->
+<!-- This is the Discussion-Review rubric.
+     The Bouncer row and the review row of the Discussion-Review perch read it.
+     The Discussion-Bouncer row interpolates it as the rubric marker value of bouncer-template-seed.md and bouncer-template-judge.md,
+     and the Discussion-Burler-Review row interpolates it the same way into internal/burlerengine's review prompt.
+     It is a marker VALUE, never a template: its only markers are the ones ReadRubric fills,
+     and internal/stencil's StripLeadingComment removes this comment before either consumer sees it.
+lym-stencil: sha256=76ecdd8f33abc709c58c929e207fb4082ebb237f6f07adb3d3671409705cae28 build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Discussion-Review rubric
 
@@ -42,6 +41,18 @@ Do not flag any of the following as a finding:
   so is a rule that hands downstream a halt on discovering such a fact.
   The fix is the research done and its answer recorded with the evidence it rests on.
   A fact the writer was told not to gather is no such question.
+- **An unpinned tool fact.**
+  A Decision or Constraint that rests on how git or another tool behaves states the observed result and where it is pinned:
+  a test, a recorded command and its output, or the tool's documentation.
+  One that states the behavior without the result or the pin is a finding, because every later round repeats the experiment to check it.
+- **A bug entry's record without its fault, cause or test.**
+  For a board entry labelled `bug`, the record states the observed fault and how to reproduce it,
+  the root cause or what is still unknown about it,
+  and the test that fails on the merge base, why no test seam exists, or that the entry fixes no bug.
+  A record that omits one of them is a finding.
+- **A check left for the reviewer to infer.**
+  A record whose change must measure a figure, make a doc statement true or add a test, and whose `## Acceptance criteria` does not name the figure and its measured case, the doc statement, or the test's intent and tier, is a finding.
+  The fix names each in the criteria, as the discussion spec says.
 - **A Decision that edits the task's own board entry.**
   A Decision that asks the run to change this task's own board entry's body or scope, through `lym board` or otherwise, is a finding, because the run's board lock refuses such a change.
   A Decision that writes another entry, the entry's status or its `run_settings`, or changes board-module code is not flagged by this bullet.

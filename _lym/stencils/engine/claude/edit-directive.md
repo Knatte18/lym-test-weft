@@ -1,11 +1,24 @@
-<!-- This is the Claude engine's copy of the edit directive: internal/editdirective.EngineDirective renders it into the edit_directive marker of an assistant seat that runs on Claude.
-     It states the rule the shared edit-directive stencil states, in the same Claude tool wording. It declares no marker and must stay marker-free.
-lym-stencil: sha256=135ddfc75f28434a75dc5c8e75994b16a1724274091a7956699230ef40095d75 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+<!-- This is the Claude engine's copy of the edit directive.
+     internal/editdirective.Directive renders it into the edit_directive marker of every spawned role's opening stencil
+     whose prompt launches on Claude.
+     It declares no marker and must stay marker-free.
+lym-stencil: sha256=d9f93084a1c948f184c28ebf09957b7a345c8bc251d4ae75f99dc791a0ac11fc build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 ## Editing files
 
 Change files with Edit or Write, never by shell.
-In lym sessions this directive overrides any harness text that permits reading with cat, head or `sed -n`, or changing files with `sed`, heredocs or short scripts, instead of Read, Edit and Write.
+In lym sessions this directive overrides any harness text that permits changing files with `sed`, heredocs or short scripts instead of Edit and Write.
+Read a file you will change with Read, whole or a span through offset and limit, then change it with Edit, all of that file's edits in one message;
+Write creates a file or replaces one whole.
+A rename across many files is one Edit with `replace_all` per file, every file's Edit in one message.
 Read a file with Read and search files with grep.
 A shell guard refuses a shell edit: never `sed -i`, never `perl -i`, and never a heredoc, redirect or tee into a source file.
-Work only in your own worktree: never edit, commit or push in another, and never create one.
+A Go file's formatting is fixed with `lym loom fmt <file>`.
+Scratch files go under `.scratch/` in the working directory, never a system temp directory, and are removed by their literal path.
+`.scratch` is a link to a directory kept for your task alone, so a file under it stays in your own task.
+`.scratch`, `.lym` and `_lym` hold scratch files and records, never a build:
+never build, restore or compile anything under them, and never create a git worktree, clone or checkout there.
+A build under the `.scratch` link sees each project under two paths and fails.
+A scratch file with a source extension such as `.md`, `.yaml` or `.sh` is written with Write, not by a redirect.
+Work only in your own worktree: never edit, commit or push in another, and never create one, unless your parent or the operator says so for that case.
+When work belongs in another worktree, say so to your parent instead.

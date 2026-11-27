@@ -1,23 +1,50 @@
 <!-- This is the darn writer's Step 4 list for a run whose verify gate has a cold fixer:
-     the writer and its subagents run no gate, and the writer acts only on what the fixer leaves.
-     internal/darnengine's DarnTable fills its one marker, {{.subagent_model}}, from loom.yaml's subagent_model,
+     the writer and its subagents run no gate, except the writer's single measuring run of one test class,
+     and the writer acts only on what the fixer leaves.
+     The writer asks its parent for the single run of the test a task's reported failure names, before it diagnoses it.
+     internal/darnengine's DarnTable reads it for the writer's engine,
+     fills the {{.subagent_model}} marker its Claude engine block declares from loom.subagent_model,
+     fills the {{.measure_call}} marker with the measuring call the hub's gate config can run,
      then fills the result whole into darn-template-write's make_change marker.
-lym-stencil: sha256=8980cff9fe38be4df5bd6d7673db111cc66ab6863abccb1b0f0605af87885ab1 build=e9895522a011fa6a53b58c2a4fc124e423a121ec time=2026-11-07T15:15:36Z -->
+lym-stencil: sha256=d0a7dbd310c72dd1fd3a5adf44902e8feef6832668ec36701c587700f800b78f build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
-1. Edit the repository to make the change.
+1. When the task starts from a reported test failure, ask your parent before you diagnose it or make any edit:
+   send `lym creel post --parent --expect-reply "<text>"`, then end your turn to wait.
+   The text names the test exactly and the tier it belongs to,
+   and asks the parent to run that test once on your base through `lym gate test`.
+   When the parent reports that the run's report shows the named test ran and passed,
+   the failure no longer reproduces on your base: the entry is one that landed work overtook, and Step 3 settles it.
+   When the report does not show the named test ran, because it was skipped for another tier or matched no test,
+   diagnose the failure as usual.
+   Edit the repository to make the change.
    Follow the existing patterns, and the PATTERN entries in this prompt.
    Each commit is one change, with its own reads and edits.
-2. Hand work that needs no overview of the change to fresh subagents through the Agent tool, each with `subagent_type: "general-purpose"` and `model: "{{.subagent_model}}"`: a batch of lookups, and per-package work whose edits you have already decided, one subagent per package, each owning its own files.
-   Launch every subagent of a batch together in one message.
-   Give each Agent call the `effort`, and each prompt the skills, that the subagent passage of your system prompt names.
+2. {{template "engine-darn-subagents"}}
    A fresh subagent sees none of this session, so each prompt names the files the subagent owns and the edits to make, and tells the subagent to run no `lym gate test`.
    Keep in this session the work that needs the overview: the design, a change that spans packages, the commits and the change description.
 3. Run no `lym gate test` yourself.
+   There are two exceptions.
+   One is a value the change needs that only a test run shows, such as a golden test's output.
+   The other is a fact the change needs about how an external tool such as tmux behaves:
+   learn it from a test you write in the repository, in the tier the hub runs that tool's tests in.
+   For either, run that one test class once through `{{.measure_call}}`,
+   with the args by which the tier's runner selects one class.
+   The call names one package or project and selects one class, so it never starts a whole tier.
+   The args reach every tier the call runs, so they must suit each of them.
+   Never learn how a tool behaves from processes you start in the shell, and never start a background or detached process from it:
+   such a process outlives your command and runs outside every memory cap lym sets.
+   Never run a raw test command for it: a raw run can exit 0 with no output when no test ran, and only the gate's report says so.
+   When that report says a project ran no test, the property that makes it run is the one its project file's `IsTestProject` condition names.
+   When the tier's command holds `{args}`, run the same gate call once more with `-p:<property>=true` among the args after `--`,
+   and never the raw command the report's line suggests.
+   When that run still runs no test, or the tier's command holds no `{args}`, name the tests to your parent.
    Once you end your turn, the row's verify gate tests your committed tree, and a cold fixer clears its failures before you hear of them.
    You are re-prompted only with what the fixer leaves: act on that alone.
 4. Update, in the same commits as the code, the docs the change makes stale: the package doc of each package whose behavior changes, `doc.go` for a Go package;
    the repository's overview doc when a module table or execution stack it shows changes;
    and, when the repository has a `PATTERN.md`, its entry for a cross-cutting invariant the change adds or changes.
 5. Apply each bullet of the record's `## PATTERN changes` section to `PATTERN.md` in your own commits.
-6. Commit on the task branch in small, coherent commits.
+6. Commit on the task branch after each coherent step, as soon as its edits are made, in small commits.
+   Never hold the change uncommitted until the end:
+   a stall, a dead session or a reboot then loses at most one step, and your parent sees your progress in the branch's history.
    Never push: the landing steps that follow push the branch.

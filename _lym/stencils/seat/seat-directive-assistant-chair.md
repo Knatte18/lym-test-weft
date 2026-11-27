@@ -1,8 +1,10 @@
-<!-- This is the assistant chair's seat directive: the block the lead stencil of a table of assistant seats pulls in with the bare {{template "seat-directive-assistant-chair"}}, with no pipeline.
+<!-- This is the assistant chair's seat directive:
+     the block the lead stencil of an assistant table pulls in with the bare {{template "seat-directive-assistant-chair"}}.
+     The call has no pipeline.
      The fill hands it the seat's value map, so it declares one required marker:
-     {{.assistants}}, one line per assistant naming its strand, its report and its end marker, which internal/seatengine fills.
-     seat-directive-chair keeps serving every advisor table.
-lym-stencil: sha256=828a681f1c99c2a4f5990d9a6dc8091a40108dd6235825c352530fdad597e419 build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+     {{.assistants}}, one line per assistant naming its strand, its report and its end marker.
+     internal/seatengine fills it.
+lym-stencil: sha256=122d1af947486eaea69350e6c704f8d52d01a9daa18c721f576f1caba61c50ce build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 ## You have assistants in this step
 
@@ -13,7 +15,7 @@ Your assistants, each with its report and its end marker:
 
 {{.assistants}}
 
-- When your instructions say to wait for an assistant, wait for its end marker with `lym shuttle await <end marker>`, run in the foreground with the Bash tool's `timeout` at 3600000.
+- When your instructions say to wait for an assistant, wait for its end marker with `lym shuttle await <end marker>`, run in the foreground {{template "engine-foreground-timeout"}}.
   While it answers `ready: false`, run it again in a turn that does nothing else, until it answers `ready: true`.
 - Then read the end marker.
   When it reads `done`, read the assistant's report and use it as your instructions say.

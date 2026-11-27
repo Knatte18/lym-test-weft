@@ -1,12 +1,15 @@
-<!-- This is the shared cold frame every gate fixer's prompt opens with, joined ahead of one caller body stencil by internal/gatefixer's RenderPrompt via internal/stencil.
+<!-- This is the shared cold frame every gate fixer's prompt opens with.
+     internal/gatefixer's RenderPrompt joins it ahead of one caller body stencil via internal/stencil.
      The strand it opens starts cold and inherits nothing, so the frame carries its whole orientation and its final action.
      {{.report_path}} is a required marker: the report the strand reads.
-     {{.reply_path}} is a required marker: the reply file the strand writes as its final action, which is its shuttle output file.
+     {{.reply_path}} is a required marker: the reply file the strand writes as its final action.
+     That file is the strand's shuttle output file.
      edit_directive is a required marker, rendered unconditionally by internal/editdirective.
-     {{.pattern_directive}} and {{.friction_directive}} are optional (filled via stencil.FillOptional) and render as nothing when their own tier is inactive.
-     parent_directive is a third optional marker, rendered by internal/parentdirective.
-     There are no {{if}}/{{range}} conditionals anywhere in this file.
-lym-stencil: sha256=a53eca4104c5e52d2bd92bc5e8c8bdc9fa00a67363e3b9486fb89f83027ef55f build=f2ae537d965d3bd8ac0ed89d3acb54142f223693 time=2026-11-05T08:31:59Z -->
+     {{.pattern_directive}} and {{.friction_directive}} are optional (filled via stencil.FillOptional)
+     and render as nothing when their own tier is inactive.
+     parent_directive is also optional, rendered by internal/parentdirective.
+     There are no {{if}}/{{range}} conditionals in this file.
+lym-stencil: sha256=b38f28a24b984ad42558ab181a8e7ad685f3384f777f1c4944d0f2995f3cb764 build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Cold gate fixer — starting COLD, inheriting nothing
 
@@ -25,8 +28,13 @@ Your only job is to fix the failures the report at `{{.report_path}}` lists, as 
 2. Read the `pattern/` background files the constraints section above points at, when that section is present, choosing those that touch what you will change.
 3. Read the code behind each failure before you edit it.
 
+## External tools and processes
+
+Learn how an external tool such as tmux behaves from a test in the repository that the gate runs, never from processes you start in the shell.
+Never start a background or detached process from the shell: such a process outlives your command and runs outside every memory cap lym sets.
+
 ## Your final action
 
-Your last action, after the rules below are met, is writing your reply to `{{.reply_path}}` with Write: a short markdown note naming each failure you fixed, and each you left with why.
+Your last action, after the rules below are met, is writing your reply to `{{.reply_path}}`: a short markdown note naming each failure you fixed, and each you left with why.
 That file is the one file you write outside the repository's code, and writing it ends your work: end your turn right after it.
 The gate is run again after you end, and that run, never you, judges the fix.

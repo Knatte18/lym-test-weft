@@ -1,10 +1,12 @@
 <!-- This is the reflection agent's own prompt.
-     It is shipped as an embedded default in the top-level stencils package (stencils/stencils.go), seeded to <hub>/_board/_lym/stencils/friction/ and read from there at call time by internal/frictionengine,
-     which fills it through stencil.Fill and hands it to shuttle as the reflection agent's entire instruction set.
-     Every marker below is a top-level {{.X}} substitution;
-     stencil.Fill requires every marker (friction_dir, report_path, note_list, task_slug, parent_directive, edit_directive) non-empty, parent_directive being rendered by internal/parentdirective and edit_directive by internal/editdirective,
-     and there are no {{if}}/{{range}} conditionals anywhere in this file.
-lym-stencil: sha256=7f34f000e7f690578e649dbf2a315dba0f2b9368b9ad64f55ed3a5bbac5337d7 build=ef912d4155479098331ad98253e9a38250450e09 time=2026-10-27T07:47:27Z -->
+     It is shipped as an embedded default in the top-level stencils package (stencils/stencils.go),
+     seeded to the Bolt checkout's `_lym/stencils/friction/`.
+     internal/frictionengine reads it from there at call time and fills it through stencil.Fill.
+     It hands the result to shuttle as the reflection agent's entire instruction set.
+     Every marker below is a top-level {{.X}} substitution, and stencil.Fill requires each to be non-empty.
+     internal/parentdirective renders parent_directive, and internal/editdirective renders edit_directive.
+     There are no {{if}}/{{range}} conditionals in this file.
+lym-stencil: sha256=26a1995b92fe8fa80a4bc96724696f763e3ded1396ffcc47b0cd7d6a7859821c build=2bc62d626810d8eb25759e08749fa2a1a411e4bc time=2026-11-27T15:03:55Z -->
 
 # Reflection — read the friction notes, file every distinct lym problem
 
@@ -44,6 +46,15 @@ intake filters later.
 
 For a `loom-halt` or `loom-crash-resume` note, file an issue only when the notes, the reason or the trace show a lym problem behind the event.
 A halt caused by the task's own code, or a review segment that did not converge, is dropped; a process signal such as a spent budget or an escalation is not a defect.
+A `build-skew` halt is dropped too: the run's lym was older than a board stencil it read,
+which is a binary to update and not a lym defect;
+the driver hands such a run to a fresh driver when a newer build is on disk.
+A `transient-stop` halt is dropped too: an infrastructure failure that lym classed transient, which a re-step can clear.
+A step loop re-steps it once.
+The Go driver also re-steps a git-transport or GitHub API stop with waits, and sends any other class to the tackler;
+the prompt-driven driver repairs what outlasts the loop's re-step under its repair cap.
+File one only when the notes show such halts at one row that the re-steps never cleared,
+or a failure classed transient that no retry could fix.
 A dropped event stays recoverable: the note names the trace file, the run's status and history stay on disk, and the operator can still file through `lym selfreport create`.
 
 ## Step 3 — File each issue
@@ -52,7 +63,14 @@ For each issue, invoke `lym selfreport create` yourself, following its own guida
 This prompt does not restate that contract.
 File only through `lym selfreport create`, never through `gh`.
 
-Each issue body states what happened, why it is abnormal and what to do, and then ends with a provenance line naming the task slug `{{.task_slug}}` and the file names of the notes the issue came from.
+Each issue body states what happened, why it is abnormal and what to do, and then gives a provenance line naming the task slug `{{.task_slug}}` and the file names of the notes the issue came from.
+The provenance line is the last of what you write; the sections that `--attach` appends follow it.
+Never file an issue with an empty body.
+
+When the problem rests on evidence in a run directory, such as a capture, a trace or a log line, the issue carries it inline:
+attach the file with `--attach`, or quote the lines that show the problem.
+A run directory is deleted with its worktree, so an issue that only names the path names a file nobody can read once the run is gone.
+An attachment obeys the content rule below like the rest of the body: quote an excerpt instead when the file holds anything the rule forbids.
 
 Content rule, which is a hard rule: the repository these issues go to is public.
 An issue body describes the lym problem and may quote lym's own output, verb names and repo-relative lym paths.
