@@ -1,0 +1,41 @@
+diff --git a/services/api/greeting.go b/services/api/greeting.go
+index 3351308..430e814 100644
+--- a/services/api/greeting.go
++++ b/services/api/greeting.go
+@@ -9,3 +9,8 @@ func Greeting(name string) string {
+ 	}
+ 	return "Hello, " + name + "!"
+ }
++
++// ShoutGreeting returns the greeting for name upper-cased, using "world" when name is empty or whitespace.
++func ShoutGreeting(name string) string {
++	return strings.ToUpper(Greeting(name))
++}
+diff --git a/services/api/greeting_test.go b/services/api/greeting_test.go
+index 9178fd9..ce7fad4 100644
+--- a/services/api/greeting_test.go
++++ b/services/api/greeting_test.go
+@@ -21,3 +21,23 @@ func TestGreeting(t *testing.T) {
+ 		})
+ 	}
+ }
++
++func TestShoutGreeting(t *testing.T) {
++	tests := []struct {
++		description string
++		name        string
++		want        string
++	}{
++		{description: "named", name: "Ada", want: "HELLO, ADA!"},
++		{description: "empty", name: "", want: "HELLO, WORLD!"},
++		{description: "whitespace-only", name: " \t\n", want: "HELLO, WORLD!"},
++	}
++
++	for _, test := range tests {
++		t.Run(test.description, func(t *testing.T) {
++			if got := ShoutGreeting(test.name); got != test.want {
++				t.Errorf("ShoutGreeting(%q) = %q, want %q", test.name, got, test.want)
++			}
++		})
++	}
++}
