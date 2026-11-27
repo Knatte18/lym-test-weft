@@ -1,6 +1,6 @@
 # Board
 
-Rendered 2026-11-27 15:47 UTC; every age below is as of then.
+Rendered 2026-11-27 15:48 UTC; every age below is as of then.
 Prime owner: `neve`.
 
 Hub-wide default: autonomy `off` · PR setting `off`.
