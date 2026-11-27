@@ -1,21 +1,17 @@
 # services/api: add a ShoutGreeting helper
 
-`ShoutGreeting(name string) string` returns the greeting `Greeting` builds for `name`, upper-cased:
-`ShoutGreeting("Ada")` is `HELLO, ADA!`, and an empty or whitespace-only name falls back to `HELLO, WORLD!`.
-It reuses `Greeting` rather than repeating its default-name rule.
+Adds `ShoutGreeting(name string) string` to `services/api`, which returns the greeting for `name` upper-cased.
+`Greeting` is unchanged, and the diff adds no caller of the new helper outside its test.
 
-`TestShoutGreeting` pins a named case and the empty-name fallback.
+The helper upper-cases the result of `Greeting`, so it shares that function's fallback:
+an empty or whitespace-only name gives `HELLO, WORLD!`.
+`TestShoutGreeting` covers a named, an empty and a whitespace-only input.
 
-## Design decisions
-
-- Upper-casing uses `strings.ToUpper`, which maps non-ASCII letters by Unicode rules.
-
-## SSH transport
-
-The repository's remotes use `git@github.com` SSH URLs.
-No fetch, push or ls-remote failed over SSH before this description was written.
+The change also serves as a trial of working with the GitHub remotes over SSH (`git@github.com` URLs).
+No push, fetch or `ls-remote` is known to have failed over SSH up to the writing of this description.
+Steps that come after it, including the merge and cleanup, are not covered by that statement.
 
 ## Merge danger
 
 **Door:** two-way
-**Blast radius:** services/api
+**Blast radius:** api
